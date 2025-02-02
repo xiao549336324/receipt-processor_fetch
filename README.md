@@ -90,16 +90,6 @@ The API will now be available at `http://localhost:8080`.
 
 ## 🛠️ Testing the API
 
-### ** Health Check**
-To verify if the API is running:
-```sh
-curl http://localhost:8080/health
-```
-Expected response:
-```json
-{"status": "ok"}
-```
-
 ### **1️⃣ Process a Receipt**
 ```sh
 curl -X POST http://localhost:8080/receipts/process \
@@ -170,5 +160,5 @@ Expected response:
 ---
 
 ## 📞 Contact
-For any issues, please contact: `your.email@example.com`
+For any issues, please contact: `xiaoyoung99@gmail.com`
 

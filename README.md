@@ -90,7 +90,7 @@ The API will now be available at `http://localhost:8080`.
 
 ## 🛠️ Testing the API
 
-### **1️⃣ Health Check**
+### ** Health Check**
 To verify if the API is running:
 ```sh
 curl http://localhost:8080/health
@@ -100,7 +100,7 @@ Expected response:
 {"status": "ok"}
 ```
 
-### **2️⃣ Process a Receipt**
+### **1️⃣ Process a Receipt**
 ```sh
 curl -X POST http://localhost:8080/receipts/process \
      -H "Content-Type: application/json" \
@@ -131,7 +131,7 @@ Expected response:
 { "id": "7fb1377b-b223-49d9-a31a-5a02701dd310" }
 ```
 
-### **3️⃣ Retrieve Points**
+### **2️⃣ Retrieve Points**
 ```sh
 curl -X GET http://localhost:8080/receipts/7fb1377b-b223-49d9-a31a-5a02701dd310/points
 ```

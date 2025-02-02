@@ -9,7 +9,7 @@ Ensure **Docker** is installed on your system.
 
 ### **2️⃣ Clone the Repository**
 ```sh
-git clone https://github.com/your-repo/receipt-processor.git
+git clone https://github.com/your-repo/receipt-processor_fetch.git
 cd receipt-processor
 ```
 

@@ -16,21 +16,27 @@ public class ReceiptProcessorController {
     @Autowired
 	GlobalCache globalCache;
 
-    @PostMapping("/process")
+	// Process and store the receipt while calculating points
+	@PostMapping("/process")
 	public ResponseEntity<Map<String, String>> processReceipt(@RequestBody ReceiptBean receipt) {
+		// Validate the receipt format before proceeding
 		if (!isValidReceipt(receipt)) {
 			return ResponseEntity.badRequest().body(Map.of("message", "The receipt is invalid. Please verify input."));
 		}
 
+		// Generate a unique receipt ID
 		String receiptId = UUID.randomUUID().toString();
 		globalCache.receiptBeanCacheMapPut(receiptId, receipt);
 
+		// Calculate points for the given receipt
 		int points = calculatePoints(receipt);
 		globalCache.pointsCacheMapPut(receiptId, points);
 
+		// Return a success response with the generated receipt ID
 		return ResponseEntity.ok(Map.of("id", receiptId));
 	}
 
+	// Validate the receipt format to ensure it meets the expected criteria
 	@GetMapping("/{id}/points")
 	public ResponseEntity<Map<String, String>> getPoints(@PathVariable String id) {
 		Integer points = globalCache.pointsCacheMapGet(id);
@@ -42,10 +48,12 @@ public class ReceiptProcessorController {
 
 	private boolean isValidReceipt(ReceiptBean receipt) {
 
-		return receipt.getRetailer() != null && receipt.getPurchaseDate() != null &&
-				receipt.getPurchaseTime() != null && receipt.getItems() != null &&
-				!receipt.getItems().isEmpty() && receipt.getTotal() != null &&
-				Pattern.matches("^\\d+\\.\\d{2}$", receipt.getTotal());
+		return receipt.getRetailer() != null && // The retailer name must not be null
+				receipt.getPurchaseDate() != null && // The purchase date must not be null
+				receipt.getPurchaseTime() != null && // The purchase time must not be null
+				receipt.getItems() != null && !receipt.getItems().isEmpty() && // The receipt must contain at least one item
+				receipt.getTotal() != null && // The total amount must not be null
+				Pattern.matches("^\\d+\\.\\d{2}$", receipt.getTotal()); // The total amount must be in the format "number.two decimals"
 	}
 
 	private int calculatePoints(ReceiptBean receipt) {

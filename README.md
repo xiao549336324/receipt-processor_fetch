@@ -71,6 +71,7 @@ The Receipt Processor API allows users to submit receipt data, assigns a unique 
 
 ### **1️⃣ Prerequisites**
 Ensure **Docker** Desktop is running before proceeding.
+
 This project requires JDK 23. If your installed JDK version is not JDK 23, you need to either install JDK 23 or modify the JDK version in build.gradle and Dockerfile to match your locally installed JDK version for a successful build. (Tested with JDK 19, 21, and 23.)
 
 ### **2️⃣ Clone the Repository**
